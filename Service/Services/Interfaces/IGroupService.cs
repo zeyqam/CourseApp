@@ -4,7 +4,7 @@ using Domain.Models;
 
 namespace Service.Services.Interfaces
 {
-    public interface IGroupServices
+    public interface IGroupService
     {
         void Create(Group data);
         void Delete(int? id);
