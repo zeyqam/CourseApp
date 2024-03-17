@@ -43,12 +43,12 @@ namespace Service.Services
 
         public List<Group> GetAllGroupsByRoom(Func<Group, bool> predicate)
         {
-            throw new NotImplementedException();
+            return _groupRepo.GetAllWithExpression(predicate);
         }
 
         public List<Group> GetAllGroupsByTeacher(Func<Group, bool> predicate)
         {
-            throw new NotImplementedException();
+            return _groupRepo.GetAllWithExpression(predicate);
         }
 
         public Group GetById(int? id)
@@ -61,9 +61,23 @@ namespace Service.Services
 
         
 
-        public void Update(Group data)
+        public void Update(Group updateGroup)
         {
-            _groupRepo.Update(data); 
+            if(updateGroup is null) throw new NotFoundException(ResponseMessage.DataNotFound);
+            Group existingGroup = _groupRepo.GetById((int)updateGroup.Id);
+            if (existingGroup != null)
+            {
+                existingGroup.Name = updateGroup.Name;
+                existingGroup.Teacher = updateGroup.Teacher;
+                existingGroup.Room = updateGroup.Room;
+            }
+            else
+            {
+                throw new InvalidOperationException("Group not found");
+            }
+            if (existingGroup is null) throw new NotFoundException(ResponseMessage.DataNotFound);
+
+            _groupRepo.Update(updateGroup); 
         }
     }
 }

@@ -127,27 +127,90 @@ namespace CourseApp.Controllers
         }
         public void UpdateGroup()
         {
-            Console.WriteLine("Enter the ID of the group to update:");
-            int groupId = int.Parse(Console.ReadLine());
-
-            
-            Group groupToUpdate = _groupService.GetById(groupId);
-
-            if (groupToUpdate != null)
+            try
             {
-                Console.WriteLine("Enter the new name for the group:");
-                string newName = Console.ReadLine();
+                Console.WriteLine("Enter the ID of the group:");
+                if (int.TryParse(Console.ReadLine(), out int groupId))
+                {
+                    Group existingGroup = _groupService.GetById(groupId);
+                    if (existingGroup != null)
+                    {
+                        Console.WriteLine($"Current Group Name: {existingGroup.Name}");
+                        Console.Write("Enter new Group Name: ");
+                        string newName = Console.ReadLine();
 
-                
-                groupToUpdate.Name = newName;
+                        Console.WriteLine($"Current Teacher: {existingGroup.Teacher}");
+                        Console.Write("Enter new Teacher: ");
+                        string newTeacher = Console.ReadLine();
 
-               
-                _groupService.Update(groupToUpdate);
-                Console.WriteLine("Group updated successfully!");
+                        Console.WriteLine($"Current Room: {existingGroup.Room}");
+                        Console.Write("Enter new Room: ");
+                        string newRoom = Console.ReadLine();
+
+                        existingGroup.Name = newName;
+                        existingGroup.Teacher = newTeacher;
+                        existingGroup.Room = newRoom;
+
+                        _groupService.Update(existingGroup);
+                        Console.WriteLine("Group updated successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Group not found");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid group ID.");
+
+                }
+
+            }
+            catch (InvalidOperationException ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            
+           
+        }
+        public void GetAllGroupsByRoom()
+        {
+            Console.WriteLine("Enter the room number:");
+            string roomNumber = Console.ReadLine();
+
+            Console.WriteLine($"Groups in Room {roomNumber}:");
+            List<Group> groups = _groupService.GetAllGroupsByRoom(group => group.Room == roomNumber);
+            if (groups.Any())
+            {
+                foreach (var group in groups)
+                {
+                    Console.WriteLine($"Group ID: {group.Id}, Name: {group.Name}, Teacher: {group.Teacher}");
+                }
             }
             else
             {
-                Console.WriteLine("Group not found!");
+                Console.WriteLine("No groups found for the specified room number.");
+            }
+
+        }
+        public void GetAllGroupsByTeacher()
+        {
+            Console.WriteLine("Enter the teacher's name:");
+            string teacherName = Console.ReadLine();
+
+            Console.WriteLine($"Groups by Teacher {teacherName}:");
+            List<Group> groups = _groupService.GetAllGroupsByTeacher(group => group.Teacher == teacherName);
+            if (groups.Any())
+            {
+                foreach (var group in groups)
+                {
+                    Console.WriteLine($"Group ID: {group.Id}, Name: {group.Name}, Room: {group.Room}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No groups found for the specified teacher.");
             }
         }
     }
