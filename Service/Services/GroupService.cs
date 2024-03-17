@@ -41,6 +41,16 @@ namespace Service.Services
             return _groupRepo.GetAll();
         }
 
+        public List<Group> GetAllGroupsByRoom(Func<Group, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Group> GetAllGroupsByTeacher(Func<Group, bool> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         public Group GetById(int? id)
         {
             if (id == null) throw new ArgumentNullException();
@@ -49,14 +59,11 @@ namespace Service.Services
             return group;
         }
 
-        public List<Group> GetByName(string searchText)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void Update(Group data)
         {
-            throw new NotImplementedException();
+            _groupRepo.Update(data); 
         }
     }
 }

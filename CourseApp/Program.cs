@@ -20,11 +20,18 @@ while (true)
                 groupController.Create();
                 break;
 
-                case (int)OperationType.GroupDelete:
+                case (int)OperationType.DeleteGroup:
                     groupController.Delete(); break;
 
                 case (int)OperationType.GetAllGroups:
                     groupController.GetAll(); break;
+
+            case (int)OperationType.GetGroupById:
+                groupController.GetById();break;
+
+            case (int)OperationType.UpdateGroup:
+                groupController.UpdateGroup(); break;
+
 
             default:
                 ConsoleColor.Red.WriteConsole("Operation is wrong,please choose again");
@@ -54,5 +61,5 @@ while (true)
 static void GetMenues()
 {
     
-    ConsoleColor.Cyan.WriteConsole (" Choose one operation:  1-Group create, 2-Group delete,3-Get all Groups,Update Group");
+    ConsoleColor.Cyan.WriteConsole (" Choose one operation:  1-Create group, 2-Update Group,3-Delete Group, 4-Get Group by Id,5-Get all Groups by Teacher,6-Get all Groups by Room,7-Get all Groups,8-Create Student,9-Update Student,10-Get Student by Id,11-Delete Student,12-Get Students by Age,13-Get all students by Group Id,14-Search Groups by Name,15-Search students by Name or Surname ");
 }

@@ -86,8 +86,68 @@ namespace CourseApp.Controllers
             }
             else
             {
-                ConsoleColor.Red.WriteConsole("id format is wrong,please add again");
+                ConsoleColor.Red.WriteConsole("Id format is wrong,please add again");
                 goto Id;
+            }
+        }
+        public void GetById()
+        {
+            ConsoleColor.Cyan.WriteConsole("Add Group id: ");
+        Id: string idStr = Console.ReadLine();
+            int id;
+            bool isCorrectFormat = int.TryParse(idStr, out id);
+            if (isCorrectFormat)
+            {
+                try
+                {
+                    if (id <= 0)
+                    {
+                        Console.WriteLine("Invalid ID. ID must be greater than zero.");
+                        return;
+                    }
+                    Group group=_groupService.GetById(id);
+                    if(group != null)
+                    {
+                        ConsoleColor.Green.WriteConsole($"Group name: {group.Name},Teacher: {group.Teacher},Room:{group.Room}");
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex.Message);
+                    goto Id;
+                }
+            }
+            else
+            {
+                ConsoleColor.Red.WriteConsole("Id format is wrong,please add again");
+                goto Id;
+            }
+        }
+        public void UpdateGroup()
+        {
+            Console.WriteLine("Enter the ID of the group to update:");
+            int groupId = int.Parse(Console.ReadLine());
+
+            
+            Group groupToUpdate = _groupService.GetById(groupId);
+
+            if (groupToUpdate != null)
+            {
+                Console.WriteLine("Enter the new name for the group:");
+                string newName = Console.ReadLine();
+
+                
+                groupToUpdate.Name = newName;
+
+               
+                _groupService.Update(groupToUpdate);
+                Console.WriteLine("Group updated successfully!");
+            }
+            else
+            {
+                Console.WriteLine("Group not found!");
             }
         }
     }

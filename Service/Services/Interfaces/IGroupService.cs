@@ -11,7 +11,8 @@ namespace Service.Services.Interfaces
         void Update(Group data);
         Group GetById(int? id);
         List<Group> GetAll();
-        List<Group> GetByName(string searchText);
+        List<Group> GetAllGroupsByTeacher(Func<Group,bool> predicate);
+        List<Group> GetAllGroupsByRoom(Func<Group, bool> predicate);
 
     }
 }
