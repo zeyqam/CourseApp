@@ -49,10 +49,23 @@ Operation: string operationStr = Console.ReadLine();
                 studentController.Delete(); break;
 
             case (int)OperationType.UpdateStudent:
-                studentController.UpdateStudent();break;
+                studentController.UpdateStudent(); break;
 
-                case(int)OperationType.GetAllStudentsByGroupId:
+            case (int)OperationType.GetAllStudentsByGroupId:
                 studentController.GetallStudetsByGroupId(); break;
+
+            case (int)OperationType.SearchGroupsByName:
+                groupController.SerchGroupByName(); break;
+
+            case (int)OperationType.GetStudentByAge:
+                studentController.GetStudentByage();break;
+
+
+
+
+
+
+
 
 
 
