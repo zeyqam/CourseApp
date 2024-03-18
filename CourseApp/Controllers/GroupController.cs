@@ -35,8 +35,8 @@ namespace CourseApp.Controllers
                 try
                 {
 
-                    
-                    _groupService.Create( new Group { Name=name,Room=roomStr,Teacher=teacher});
+
+                    _groupService.Create(new Group { Name = name, Room = roomStr, Teacher = teacher });
                     ConsoleColor.Green.WriteConsole("Data successfully added");
                 }
                 catch (Exception ex)
@@ -56,7 +56,7 @@ namespace CourseApp.Controllers
         }
         public void GetAll()
         {
-            var response=_groupService.GetAll();
+            var response = _groupService.GetAll();
             foreach (var item in response)
             {
                 string data = $" Id:{item.Id},  Group name: {item.Name}, Group room : {item.Room},Group teacher:{item.Teacher}";
@@ -67,10 +67,10 @@ namespace CourseApp.Controllers
         public void Delete()
         {
             ConsoleColor.Cyan.WriteConsole("Add Group id: ");
-            Id: string idStr= Console.ReadLine();
+        Id: string idStr = Console.ReadLine();
             int id;
-            bool isCorrectFormat=int.TryParse(idStr, out id);
-            if(isCorrectFormat)
+            bool isCorrectFormat = int.TryParse(idStr, out id);
+            if (isCorrectFormat)
             {
                 try
                 {
@@ -105,12 +105,12 @@ namespace CourseApp.Controllers
                         Console.WriteLine("Invalid ID. ID must be greater than zero.");
                         return;
                     }
-                    Group group=_groupService.GetById(id);
-                    if(group != null)
+                    Group group = _groupService.GetById(id);
+                    if (group != null)
                     {
                         ConsoleColor.Green.WriteConsole($"Group name: {group.Name},Teacher: {group.Teacher},Room:{group.Room}");
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -127,12 +127,22 @@ namespace CourseApp.Controllers
         }
         public void UpdateGroup()
         {
-            try
+            Console.WriteLine("Enter the ID of the group:");
+        Id: string idStr = Console.ReadLine();
+            int id;
+            bool isCorrectFormat = int.TryParse(idStr, out id);
+
+
+
+            if (isCorrectFormat)
             {
-                Console.WriteLine("Enter the ID of the group:");
-                if (int.TryParse(Console.ReadLine(), out int groupId))
+
+
+
+
+                try
                 {
-                    Group existingGroup = _groupService.GetById(groupId);
+                    Group existingGroup = _groupService.GetById(id);
                     if (existingGroup != null)
                     {
                         Console.WriteLine($"Current Group Name: {existingGroup.Name}");
@@ -157,22 +167,29 @@ namespace CourseApp.Controllers
                     else
                     {
                         Console.WriteLine("Group not found");
+                        goto Id;
                     }
                 }
-                else
+                catch (InvalidOperationException ex)
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid group ID.");
 
+                    Console.WriteLine(ex.Message);
+                    goto Id;
                 }
 
-            }
-            catch (InvalidOperationException ex)
-            {
 
-                Console.WriteLine(ex.Message);
+
             }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid group ID.");
+
+            }
+
+
+
+
             
-           
         }
         public void GetAllGroupsByRoom()
         {
