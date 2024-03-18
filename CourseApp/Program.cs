@@ -4,6 +4,7 @@ using Service.Helpers.Extensions;
 
 GetMenues();
 GroupController groupController = new();
+StudentController studentController = new();
 
 
 while (true)
@@ -37,6 +38,22 @@ Operation: string operationStr = Console.ReadLine();
 
             case (int)OperationType.GetAllGroupsByTeacher:
                 groupController.GetAllGroupsByTeacher(); break;
+
+            case (int)OperationType.CreateStudent:
+                studentController.Create(); break;
+
+            case (int)OperationType.GetStudentById:
+                studentController.GetById(); break;
+
+            case (int)OperationType.DeleteStudent:
+                studentController.Delete(); break;
+
+            case (int)OperationType.UpdateStudent:
+                studentController.UpdateStudent();break;
+
+                case(int)OperationType.GetAllStudentsByGrouId:
+                studentController.GetAll(); break;
+
 
 
             default:
