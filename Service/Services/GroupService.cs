@@ -51,6 +51,8 @@ namespace Service.Services
             return _groupRepo.GetAllWithExpression(predicate);
         }
 
+       
+
         public Group GetById(int? id)
         {
             if (id == null) throw new ArgumentNullException();
@@ -59,7 +61,10 @@ namespace Service.Services
             return group;
         }
 
-        
+        public List<Group> SearchGroupsByName(string name)
+        {
+            return _groupRepo.GetAllWithExpression(group => group.Name.Contains(name));
+        }
 
         public void Update(Group updateGroup)
         {

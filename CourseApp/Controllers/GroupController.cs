@@ -230,5 +230,44 @@ namespace CourseApp.Controllers
                 Console.WriteLine("No groups found for the specified teacher.");
             }
         }
+        public void SerchGroupByName()
+        {
+
+            Console.WriteLine("Welcome to the Group Search Console App!");
+
+            while (true)
+            {
+                Console.WriteLine("\nSearch groups by name");
+                Console.Write("Enter group name: ");
+                string name = Console.ReadLine();
+
+                var groups = _groupService.SearchGroupsByName(name);
+
+                if (groups.Count > 0)
+                {
+                    Console.WriteLine("\nMatching Groups:");
+                    foreach (var group in groups)
+                    {
+                        Console.WriteLine($"ID: {group.Id}, Name: {group.Name}, Room: {group.Room}, Teacher: {group.Teacher}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No groups found with the given name.");
+                }
+
+                Console.WriteLine("\nDo you want to search for another group? (yes/no)");
+                string response = Console.ReadLine().ToLower();
+                if (response != "yes")
+                {
+                    Console.WriteLine("Exiting the application. Goodbye!");
+                    break;
+                }
+            }
+
+
+
+
+        }
     }
 }

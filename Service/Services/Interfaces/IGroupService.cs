@@ -13,6 +13,7 @@ namespace Service.Services.Interfaces
         List<Group> GetAll();
         List<Group> GetAllGroupsByTeacher(Func<Group,bool> predicate);
         List<Group> GetAllGroupsByRoom(Func<Group, bool> predicate);
+        public List<Group> SearchGroupsByName(string name);
 
     }
 }

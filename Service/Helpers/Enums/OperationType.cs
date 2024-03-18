@@ -11,6 +11,6 @@ namespace Service.Helpers.Enums
         GroupCreate=1,
          UpdateGroup,DeleteGroup,GetGroupById,GetAllGroupsByTeacher,GetAllGroupsByRoom,GetAllGroups,CreateStudent,
          UpdateStudent,GetStudentById,DeleteStudent,GetStudentByAge,
-         GetAllStudentsByGrouId,SearchGroupsByName,SearchStdentsByNameOrSurname
+         GetAllStudentsByGroupId,SearchGroupsByName,SearchStdentsByNameOrSurname
     }
 }

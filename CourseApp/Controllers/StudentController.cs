@@ -193,16 +193,52 @@ namespace CourseApp.Controllers
 
 
         }
-        public void GetAll()
-        {
-            var response = _studentService.GetAll();
-            foreach (var item in response)
-            {
-                string data = $" Id:{item.Id},  student name: {item.Name}, Student age: {item.Age},Student surname:{item.Surname}";
-                Console.WriteLine(data);
-            }
+        public void GetStudentByage()
 
+        {
+            Console.Write("Enter age: ");
+            if (int.TryParse(Console.ReadLine(), out int age) && age > 0)
+            {
+                var students = _studentService.GetStudentsByAge(age);
+                foreach (var student in students)
+                {
+                    Console.WriteLine($"ID: {student.Id}, Name: {student.Name}, Surname: {student.Surname}, Age: {student.Age}, Group ID: {student.GroupId}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid age. Please enter a positive integer.");
+            }
         }
+        public void GetallStudetsByGroupId()
+        {
+            Console.Write("Enter group ID: ");
+            if (int.TryParse(Console.ReadLine(), out int groupId))
+            {
+                var students = _studentService.GetAllStudentsByGroupId(groupId);
+                foreach (var student in students)
+                {
+                    Console.WriteLine($"ID: {student.Id}, Name: {student.Name}, Surname: {student.Surname}, Age: {student.Age}, Group ID: {student.GroupId}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid group ID. Please enter a valid integer.");
+            }
+        }
+        public void SearchstudentByNameOrsurname()
+        {
+            Console.Write("Enter student name or surname: ");
+            string nameOrSurname = Console.ReadLine();
+            var students = _studentService.SearchStudentsByNameOrSurname(nameOrSurname);
+            foreach (var student in students)
+            {
+                Console.WriteLine($"ID: {student.Id}, Name: {student.Name}, Surname: {student.Surname}, Age: {student.Age}, Group ID: {student.GroupId}");
+            }
+        }
+
+
+        
 
 
     }

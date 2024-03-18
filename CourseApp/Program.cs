@@ -51,8 +51,8 @@ Operation: string operationStr = Console.ReadLine();
             case (int)OperationType.UpdateStudent:
                 studentController.UpdateStudent();break;
 
-                case(int)OperationType.GetAllStudentsByGrouId:
-                studentController.GetAll(); break;
+                case(int)OperationType.GetAllStudentsByGroupId:
+                studentController.GetallStudetsByGroupId(); break;
 
 
 

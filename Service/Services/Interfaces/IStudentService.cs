@@ -13,8 +13,12 @@ namespace Service.Services.Interfaces
         void Delete(int? id);
         void Update(Student updateStudent);
         Student GetById(int? id);
-        List<Student> GetAll();
-        List<Student> GetAllGroupsByTeacher(Func<Student, bool> predicate);
-        List<Student> GetAllGroupsByRoom(Func<Student, bool> predicate);
+        
+        
+        
+        List<Student> GetStudentsByAge(int age);
+        List<Student> GetAllStudentsByGroupId(int groupId);
+        
+        List<Student> SearchStudentsByNameOrSurname(string nameOrSurname);
     }
 }

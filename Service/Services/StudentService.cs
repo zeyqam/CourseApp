@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Service.Helpers.Constants;
 using Service.Helpers.Exceptions;
+using System.Text.RegularExpressions;
 
 namespace Service.Services
 {
@@ -63,19 +64,27 @@ namespace Service.Services
             _studentRepo.Update(updateStudent);
         }
 
-        public List<Student> GetAll()
+        
+
+       
+
+        public List<Student> GetStudentsByAge(int age)
         {
-            return _studentRepo.GetAll();
+            return _studentRepo.GetAllWithExpression(student => student.Age == age);
         }
 
-        public List<Student> GetAllGroupsByRoom(Func<Student, bool> predicate)
+        public List<Student> GetAllStudentsByGroupId(int groupId)
         {
-            return _studentRepo.GetAllWithExpression(predicate);
+            return _studentRepo.GetAllWithExpression(student => student.GroupId == groupId);
         }
 
-        public List<Student> GetAllGroupsByTeacher(Func<Student, bool> predicate)
+        
+
+        public List<Student> SearchStudentsByNameOrSurname(string nameOrSurname)
         {
-            return _studentRepo.GetAllWithExpression(predicate);
+            return _studentRepo.GetAllWithExpression(student => student.Name.Contains(nameOrSurname) || student.Surname.Contains(nameOrSurname));
         }
+
+       
     }
 }
