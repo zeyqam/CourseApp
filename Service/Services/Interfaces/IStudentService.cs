@@ -20,5 +20,6 @@ namespace Service.Services.Interfaces
         List<Student> GetAllStudentsByGroupId(int groupId);
         
         List<Student> SearchStudentsByNameOrSurname(string nameOrSurname);
+        List<Student>SearchByname(string name);
     }
 }

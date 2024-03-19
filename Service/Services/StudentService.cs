@@ -85,6 +85,9 @@ namespace Service.Services
             return _studentRepo.GetAllWithExpression(student => student.Name.Contains(nameOrSurname) || student.Surname.Contains(nameOrSurname));
         }
 
-       
+        public List<Student> SearchByname(string name)
+        {
+            return _studentRepo.GetAllWithExpression(student => student.Name.Contains(name));
+        }
     }
 }

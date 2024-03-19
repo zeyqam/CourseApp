@@ -15,7 +15,7 @@ namespace CourseApp.Controllers
         }
         public void Create()
         {
-            ConsoleColor.Cyan.WriteConsole("Add name: ");
+            ConsoleColor.Cyan.WriteConsole("Add group name: ");
         Name: string name = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -128,68 +128,49 @@ namespace CourseApp.Controllers
         public void UpdateGroup()
         {
             Console.WriteLine("Enter the ID of the group:");
-        Id: string idStr = Console.ReadLine();
             int id;
-            bool isCorrectFormat = int.TryParse(idStr, out id);
-
-
-
-            if (isCorrectFormat)
+            while (!int.TryParse(Console.ReadLine(), out id))
             {
-
-
-
-
-                try
-                {
-                    Group existingGroup = _groupService.GetById(id);
-                    if (existingGroup != null)
-                    {
-                        Console.WriteLine($"Current Group Name: {existingGroup.Name}");
-                        Console.Write("Enter new Group Name: ");
-                        string newName = Console.ReadLine();
-
-                        Console.WriteLine($"Current Teacher: {existingGroup.Teacher}");
-                        Console.Write("Enter new Teacher: ");
-                        string newTeacher = Console.ReadLine();
-
-                        Console.WriteLine($"Current Room: {existingGroup.Room}");
-                        Console.Write("Enter new Room: ");
-                        string newRoom = Console.ReadLine();
-
-                        existingGroup.Name = newName;
-                        existingGroup.Teacher = newTeacher;
-                        existingGroup.Room = newRoom;
-
-                        _groupService.Update(existingGroup);
-                        Console.WriteLine("Group updated successfully.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Group not found");
-                        goto Id;
-                    }
-                }
-                catch (InvalidOperationException ex)
-                {
-
-                    Console.WriteLine(ex.Message);
-                    goto Id;
-                }
-
-
-
+                Console.WriteLine("Invalid input. Please enter a valid group ID:");
             }
-            else
-            {
-                Console.WriteLine("Invalid input. Please enter a valid group ID.");
 
+            try
+            {
+                Group existingGroup = _groupService.GetById(id);
+                if (existingGroup != null)
+                {
+                    Console.WriteLine($"Current Group Name: {existingGroup.Name}");
+                    Console.Write("Enter new Group Name: ");
+                    string newName = Console.ReadLine();
+
+                    Console.WriteLine($"Current Teacher: {existingGroup.Teacher}");
+                    Console.Write("Enter new Teacher: ");
+                    string newTeacher = Console.ReadLine();
+
+                    Console.WriteLine($"Current Room: {existingGroup.Room}");
+                    Console.Write("Enter new Room: ");
+                    string newRoom = Console.ReadLine();
+
+                    existingGroup.Name = newName;
+                    existingGroup.Teacher = newTeacher;
+                    existingGroup.Room = newRoom;
+
+                    _groupService.Update(existingGroup);
+                    Console.WriteLine("Group updated successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("Group not found");
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"Error updating group: {ex.Message}");
             }
 
 
 
 
-            
         }
         public void GetAllGroupsByRoom()
         {
@@ -233,7 +214,7 @@ namespace CourseApp.Controllers
         public void SerchGroupByName()
         {
 
-            Console.WriteLine("Welcome to the Group Search Console App!");
+            Console.WriteLine("Welcome to the Group Search");
 
             while (true)
             {

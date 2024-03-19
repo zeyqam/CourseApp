@@ -58,8 +58,10 @@ Operation: string operationStr = Console.ReadLine();
                 groupController.SerchGroupByName(); break;
 
             case (int)OperationType.GetStudentByAge:
-                studentController.GetStudentByage();break;
+                studentController.GetStudentByAge();break;
 
+            case (int)OperationType.SearchStdentsByNameOrSurname:
+                studentController.SearchStudentByNameOrSurname();break;
 
 
 
@@ -96,6 +98,27 @@ Operation: string operationStr = Console.ReadLine();
 
 static void GetMenues()
 {
-
-    ConsoleColor.Cyan.WriteConsole(" Choose one operation:  1-Create group, 2-Update Group,3-Delete Group, 4-Get Group by Id,5-Get all Groups by Teacher,6-Get all Groups by Room,7-Get all Groups,8-Create Student,9-Update Student,10-Get Student by Id,11-Delete Student,12-Get Students by Age,13-Get all students by Group Id,14-Search Groups by Name,15-Search students by Name or Surname ");
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.WriteLine("╔════════════════════════════════════════════════════════╗");
+    Console.WriteLine("║                     Menu Operations                     ║");
+    Console.WriteLine("╠══════╦══════════════════════════════════════════════════╣");
+    Console.WriteLine("║ Code ║                 Operation                        ║");
+    Console.WriteLine("╠══════╬══════════════════════════════════════════════════╣");
+    Console.WriteLine("║   1  ║ Create Group                                     ║");
+    Console.WriteLine("║   2  ║ Update Group                                     ║");
+    Console.WriteLine("║   3  ║ Delete Group                                     ║");
+    Console.WriteLine("║   4  ║ Get Group by Id                                  ║");
+    Console.WriteLine("║   5  ║ Get all Groups by Teacher                        ║");
+    Console.WriteLine("║   6  ║ Get all Groups by Room                           ║");
+    Console.WriteLine("║   7  ║ Get all Groups                                   ║");
+    Console.WriteLine("║   8  ║ Create Student                                   ║");
+    Console.WriteLine("║   9  ║ Update Student                                   ║");
+    Console.WriteLine("║  10  ║ Get Student by Id                                ║");
+    Console.WriteLine("║  11  ║ Delete Student                                   ║");
+    Console.WriteLine("║  12  ║ Get Students by Age                              ║");
+    Console.WriteLine("║  13  ║ Get all students by Group Id                     ║");
+    Console.WriteLine("║  14  ║ Search Groups by Name                            ║");
+    Console.WriteLine("║  15  ║ Search students by Name/Surname                  ║");
+    Console.WriteLine("╚══════╩══════════════════════════                           ");
 }
+
